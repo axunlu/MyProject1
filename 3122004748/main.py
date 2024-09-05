@@ -43,3 +43,28 @@ def calculate_similarity(original_text, plagiarized_text):
     tfidf_matrix = vectorizer.fit_transform([processed_original, processed_plagiarized])
     similarity = cosine_similarity(tfidf_matrix[0], tfidf_matrix[1])[0][0]
     return similarity
+
+
+def main():
+    if len(sys.argv) != 4:
+        print("用法:python main.py [原文文件] [抄袭版论文的文件] [答案文件] (输入绝对路径)")
+        return
+
+    # 获取三个命令行参数
+    original_file_path = sys.argv[1]
+    plagiarized_file_path = sys.argv[2]
+    output_file_path = sys.argv[3]
+    # 读文件
+    original_text = read_file(original_file_path)
+    plagiarized_text = read_file(plagiarized_file_path)
+    # 计算文本相似度
+    similarity = calculate_similarity(original_text, plagiarized_text)
+    # 结果保留小数点后两位
+    rounded_similarity = round(similarity, 2)
+    # 打开答案文件并写入答案
+    with open(output_file_path, 'w', encoding='utf-8') as f:
+        f.write(str(rounded_similarity))
+
+
+if __name__ == '__main__':
+    main()
