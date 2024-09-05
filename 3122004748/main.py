@@ -27,3 +27,19 @@ def preprocess_text(text):
     words = jieba.lcut(text)
     # 最后拼接
     return ' '.join(words)
+
+
+'''
+    计算文本相似度
+'''
+
+
+def calculate_similarity(original_text, plagiarized_text):
+    # 预处理源文本和比对文本
+    processed_original = preprocess_text(original_text)
+    processed_plagiarized = preprocess_text(plagiarized_text)
+    # 计算文本相似度
+    vectorizer = TfidfVectorizer()
+    tfidf_matrix = vectorizer.fit_transform([processed_original, processed_plagiarized])
+    similarity = cosine_similarity(tfidf_matrix[0], tfidf_matrix[1])[0][0]
+    return similarity
