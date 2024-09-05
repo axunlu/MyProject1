@@ -1,6 +1,7 @@
 import jieba
 import re
 import sys
+import cProfile
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -67,4 +68,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    cProfile.run("main()", filename="performance_analysis_result")
