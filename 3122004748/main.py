@@ -14,13 +14,16 @@ def read_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             text = f.read()
-        return text
+            if not text:
+                print(f"文件 {file_path} 内容为空。")
+                return "EmptyFile"
+            return text
     except FileNotFoundError:
         print(f"文件 {file_path} 不存在。")
-        return None
+        return "FileNotFoundError"
     except Exception as e:
         print(f"读取文件 {file_path} 时出现错误：{e}。")
-        return None
+        return "Exception"
 
 
 '''
@@ -30,7 +33,7 @@ def read_file(file_path):
 
 def preprocess_text(text):
     if text is None:
-               return None
+        return None
     try:
         # 正则表达式，去掉文本字母、数字、下划线，空白字符
         text = re.sub(r'[^\w\s]', '', text)
@@ -66,7 +69,7 @@ def calculate_similarity(original_text, plagiarized_text):
 
 
 def main():
-    if len(sys.argv)!= 4:
+    if len(sys.argv) != 4:
         print("用法:python main.py [原文文件] [抄袭版论文的文件] [答案文件] (输入绝对路径)")
         return
 
