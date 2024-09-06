@@ -37,6 +37,12 @@ class TestFunction:
             r' D:\pythonProject\MyProject1\3122004748\examples\orig_0.8_add.txt '
             r'D:\pythonProject\MyProject1\3122004748\answer.txt')
 
+    def test_parameter_few(self):
+        os.system(
+            r'python main.py D:\pythonProject\MyProject1\3122004748\examples\orig.txt'
+            r' D:\pythonProject\MyProject1\3122004748\examples\orig_0.8_add.txt '
+        )
+
     def test_file_path_exist(self):
         """
         原文文件路径存在（预期：正常打开）
