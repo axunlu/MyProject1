@@ -61,6 +61,14 @@ class TestFunction:
         exception_name = main.read_file(plagiarized_file_path)
         assert exception_name == "EmptyFile"
 
+    def test_file_encode(self):
+        """
+        文件的编码格式有误，文件内容为test（预期：得不到正常的文件内容）
+        """
+        plagiarized_file_path = r"D:\pythonProject\MyProject1\3122004748\examples\orig_encode.txt"
+        exception_name = main.read_file(plagiarized_file_path)
+        assert exception_name != "test"
+
     def test_preprocess_normal_text(self):
         """
         纯中文文本,中英文混合文本（预期：去除标点符号、分词和拼接）
